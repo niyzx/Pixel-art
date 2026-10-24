@@ -69,7 +69,7 @@ async function blobFor(i){const key=location.origin+'/__narracao_v1/'+i;let c=nu
 if(CFG.ENDPOINT)try{c=await caches.open('narracao-dino');const h=await c.match(key);if(h)return h.blob()}catch(e){}
 let r,url=CFG.AUDIO_DIR+'cena-'+(i+1)+'.mp3';
 if(CFG.ENDPOINT){const h={'Content-Type':'application/json'};if(CFG.ANON_KEY){h.apikey=CFG.ANON_KEY;h.Authorization='Bearer '+CFG.ANON_KEY}r=await fetch(CFG.ENDPOINT,{method:'POST',headers:h,body:JSON.stringify({cena:i})})}else r=await fetch(url);
-if(!r.ok)throw new Error((CFG.ENDPOINT?'API da narração':url)+' respondeu HTTP '+r.status);
+if(!r.ok){let m='';try{m=(await r.text()).slice(0,300)}catch(e){}throw new Error((CFG.ENDPOINT?'API da narração':url)+' respondeu HTTP '+r.status+(m?' – '+m:''))}
 const b=await r.blob();if(c)try{await c.put(key,new Response(b,{headers:{'Content-Type':'audio/mpeg'}}))}catch(e){}return b}
 async function loadAudio(i){const b=await blobFor(i),a=new Audio(URL.createObjectURL(b.type.startsWith('audio')?b:new Blob([b],{type:'audio/mpeg'})));a.preload='auto';
 await new Promise((ok,no)=>{a.onloadedmetadata=ok;a.onerror=()=>no(new Error('arquivo de áudio inválido (cena '+(i+1)+')'))});return a}
