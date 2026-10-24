@@ -32,7 +32,7 @@ button:active{background:#fff4}button:disabled{opacity:.4}
 <div id="start"><h1>O ÚLTIMO DIA<br>DOS DINOSSAUROS</h1><p>Um documentário animado sobre a extinção do Cretáceo</p><button id="go">INICIAR DOCUMENTÁRIO</button><div id="st"></div><div id="bts"><button id="rt">Tentar novamente</button><button id="tt">Usar voz do navegador (provisório)</button></div></div>
 <script>
 'use strict';
-const CFG={ENDPOINT:'',ANON_KEY:'',AUDIO_DIR:'audio/'};
+const CFG={ENDPOINT:'https://mesbyknzwfzwnquitbjy.supabase.co/functions/v1/narracao',ANON_KEY:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1lc2J5a256d2Z6d25xdWl0Ymp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI4NTY2NzYsImV4cCI6MjEwODQzMjY3Nn0.-9NYH1dysjdoPRBpnW4Pc_Ha8X7VtlnggIipQOyr2ho',AUDIO_DIR:'audio/'};
 const $=s=>document.querySelector(s),L=(a,b,t)=>a+(b-a)*t,cl=(x,a=0,b=1)=>x<a?a:x>b?b:x;
 const mx=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t),rg=(c,a=1)=>`rgba(${c[0]|0},${c[1]|0},${c[2]|0},${a})`;
 const S=[
